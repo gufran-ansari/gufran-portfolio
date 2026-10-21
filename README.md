@@ -2,7 +2,7 @@
 
 Static portfolio site for **Gufran Ansari**, Technical Project Manager with a web-development background. Built as a hand-rolled multi-page site: no framework, no bundler, no build step — just semantic HTML, modern CSS and vanilla ES modules.
 
-- **Live site:** `https://your-domain.com/` _(replace with the live domain — see [Deployment](#deployment))_
+- **Live site:** https://gufran-portfolio-eight.vercel.app/ — clean URLs (`/projects`, `/about`, no `.html`)
 - **Pages:** Home · Projects · About
 - **Contact:** ansarigufran302@gmail.com · [WhatsApp](https://wa.me/919762146370) · [LinkedIn](https://linkedin.com/in/gufran-ansari)
 
@@ -50,6 +50,8 @@ Then open <http://localhost:8000>.
 ├── about.html              # About
 ├── sitemap.xml             # Search-engine sitemap
 ├── robots.txt              # Crawler rules
+├── .htaccess               # Apache: clean URLs, HTTPS, caching, compression
+├── vercel.json             # Vercel equivalent (cleanUrls, cache headers)
 │
 ├── components/             # Shared markup, injected at runtime
 │   ├── header.html
@@ -87,7 +89,7 @@ Then open <http://localhost:8000>.
     │   └── projects/       # One screenshot per project card
     ├── icons/              # (unused — safe to delete)
     └── resume/
-        └── Gufran_Ansari_Resume.pdf
+        └── Gufran_Ansari_Project_Manager_Resume.pdf
 ```
 
 ---
@@ -174,23 +176,28 @@ The filtering itself needs no JavaScript change — `js/projects.js` matches `ca
 
 ## Deployment
 
-The site is fully static — upload the folder as-is to any static host (Netlify, Vercel, GitHub Pages, Cloudflare Pages, or plain nginx/Apache).
+The site is fully static — upload the folder as-is to any static host (Vercel, Netlify, GitHub Pages, Cloudflare Pages, or plain nginx/Apache).
 
-Before going live:
+**Live:** https://gufran-portfolio-eight.vercel.app/
 
-1. **Replace the base URL** in `sitemap.xml` and `robots.txt`:
-   ```bash
-   grep -rl "your-domain.com" .        # find every placeholder
-   ```
-2. **Add canonical + Open Graph tags** to the `<head>` of `index.html`, `projects.html` and `about.html` — the current markup has title/description only:
-   ```html
-   <link rel="canonical" href="https://your-domain.com/projects.html" />
-   <meta property="og:title" content="…" />
-   <meta property="og:url" content="https://your-domain.com/projects.html" />
-   <meta property="og:image" content="https://your-domain.com/assets/images/gufran-ansari-intro.webp" />
-   ```
-3. **Set the default document** to `index.html` if your host needs it.
-4. **Confirm `sitemap.xml` and `robots.txt` are served at the root** (they must be at `https://your-domain.com/sitemap.xml`).
+### Clean URLs (no `.html`)
+
+The site is served extensionless: `/projects` instead of `/projects.html`, `/about` instead of `/about.html`. Two hosts need two different files to achieve that:
+
+| Host | File | What it does |
+| --- | --- | --- |
+| Vercel | `vercel.json` | `"cleanUrls": true` — redirects `/projects.html` → `/projects` and serves the file from the clean path |
+| Apache / cPanel / LiteSpeed | `.htaccess` | 301 redirect for `.html` requests, then an internal rewrite serving the matching `.html` file |
+
+The `.htaccess` also handles HTTPS enforcement, gzip/brotli compression, long-lived caching for versioned assets, security headers and blocking the dev-only directories.
+
+If you move to a custom domain, update **all four** places so they stay in sync:
+
+```bash
+grep -rl "gufran-portfolio-eight.vercel.app" .    # sitemap.xml, robots.txt, the 3 <head>s
+```
+
+> The canonical tags, `og:url`, `sitemap.xml` and `robots.txt` all use the **clean** URLs, so they match what the rewrite serves.
 
 ### Per-page cache busting
 
@@ -207,8 +214,9 @@ Before going live:
 - `assets/images/projects/guruproperty.webp` is referenced by the Guru Property card but **the file is missing** — that card's thumbnail 404s until the asset is added.
 - `assets/images/projects/plan a giift.webp` has a space in the filename and is reached through the `plan-a-giift.webp` symlink. Rename the real file to `plan-a-giift.webp` and drop the symlink so the URL never needs `%20`.
 - `assets/icons/` contains 14 SVGs that nothing references — safe to delete.
+- `assets/images/gufran-ansari-intro.png` is **kept deliberately** — it is the `og:image` / `twitter:image` (square 1254×1254). The `.webp` version is what the page itself loads.
 - `index-old.html` is a superseded snapshot of the home page — safe to delete.
-- Tooling directories (`.gsd/`, `scripts/`, `adapters/`) are dev-only. Either delete them or exclude them from the deploy so they don't ship.
+- Tooling directories (`.gsd/`, `scripts/`, `adapters/`) are dev-only. Either delete them or exclude them from the deploy so they don't ship (the `.htaccess` already 403s them on Apache; Vercel has no equivalent rule).
 
 ---
 

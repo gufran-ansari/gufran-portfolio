@@ -1,5 +1,5 @@
 # robots.txt — Gufran Ansari | Project Manager
-# NOTE: replace https://your-domain.com/ with the live domain before deploying.
+# Live domain: https://gufran-portfolio-eight.vercel.app/
 
 User-agent: *
 Allow: /
@@ -8,4 +8,4 @@ Allow: /
 # stylesheets and scripts are explicitly NOT blocked, because search engines
 # need to fetch them to render the pages.
 
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://gufran-portfolio-eight.vercel.app/sitemap.xml

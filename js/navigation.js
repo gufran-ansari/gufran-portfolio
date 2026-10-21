@@ -129,20 +129,35 @@ export function initNavigation() {
   updateActiveLink();
   handleScroll();
 
-  // Mobile fullscreen overlay menu
+  // Mobile off-canvas menu
   if (toggle && links) {
-    toggle.addEventListener("click", () => {
-      const isOpen = links.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-      document.body.style.overflow = isOpen ? "hidden" : "";
-    });
+    const backdrop = qs(".nav__backdrop");
+
+    const setMenu = (open) => {
+      links.classList.toggle("is-open", open);
+      toggle.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      backdrop?.classList.toggle("is-visible", open);
+      document.body.classList.toggle("nav-open", open);
+      document.body.style.overflow = open ? "hidden" : "";
+    };
+
+    const isOpen = () => links.classList.contains("is-open");
+
+    toggle.addEventListener("click", () => setMenu(!isOpen()));
 
     qsa("a", links).forEach((link) => {
-      link.addEventListener("click", () => {
-        links.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
-      });
+      link.addEventListener("click", () => setMenu(false));
+    });
+
+    // Tapping the backdrop (or pressing Escape) dismisses the panel.
+    backdrop?.addEventListener("click", () => setMenu(false));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen()) {
+        setMenu(false);
+        toggle.focus();
+      }
     });
   }
 }

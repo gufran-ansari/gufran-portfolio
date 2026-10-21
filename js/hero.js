@@ -42,7 +42,6 @@ export function initHero() {
   if (nav) {
     tl.from(nav, {
       opacity: 0,
-      xPercent: -50,
       y: -14,
       duration: 0.6,
       clearProps: "all",

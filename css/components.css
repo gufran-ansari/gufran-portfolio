@@ -324,6 +324,26 @@
   transform: translate(1.5px, -1.5px);
 }
 
+/* Social icon buttons (LinkedIn, GitHub) */
+.hero__socials {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.hero__btn--icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hero__btn--icon .hero__btn-icon {
+  width: 18px;
+  height: 18px;
+}
+
 /* Metrics (No cards, separated by thin vertical dividers) */
 .hero__metrics {
   display: flex;
@@ -595,6 +615,16 @@
 
   .hero__btn {
     width: 100%;
+  }
+
+  .hero__socials {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .hero__btn--icon {
+    width: 3.25rem;
+    flex-shrink: 0;
   }
 
   .hero__visual {

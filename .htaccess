@@ -1,0 +1,84 @@
+# ==========================================================================
+#  Gufran Ansari — Portfolio
+#  Apache configuration: clean URLs, HTTPS, compression, caching
+# ==========================================================================
+#
+#  NOTE: this file is used by Apache/LiteSpeed/cPanel shared hosting.
+#  If you deploy on Vercel, .htaccess is ignored — the equivalent behaviour
+#  lives in vercel.json ("cleanUrls": true).
+# ==========================================================================
+
+# --- Default index & charset ------------------------------------------------
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+
+RewriteEngine On
+
+# --- Force HTTPS ------------------------------------------------------------
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# --- Force the canonical host (uncomment and adjust if you add a domain) ----
+# RewriteCond %{HTTP_HOST} !^gufran-portfolio-eight\.vercel\.app$ [NC]
+# RewriteRule ^ https://gufran-portfolio-eight.vercel.app%{REQUEST_URI} [R=301,L]
+
+# --- Clean URLs, step 1: redirect /projects.html -> /projects (301) ---------
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# --- Clean URLs, step 2: serve /projects from projects.html ------------------
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^(.+)$ $1.html [L]
+
+# --- Clean URLs, step 3: strip trailing slashes (/projects/ -> /projects) ---
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# --- Compression -------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml application/xml application/pdf
+</IfModule>
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/xml
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/json
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml application/xml
+</IfModule>
+
+# --- Browser caching ---------------------------------------------------------
+# Static assets are versioned with ?v=N in the markup, so they can be cached
+# aggressively. HTML is revalidated often so content updates go live quickly.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType image/webp               "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType application/pdf         "access plus 6 months"
+  ExpiresByType text/html               "access plus 1 hour"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js)$">
+    # Always revalidate: stylesheets and scripts are small and must never
+    # be served stale (the ?v=N query handles the CDN/browser cache).
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(webp|png|jpe?g|svg)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# --- Block access to source-only directories ---------------------------------
+<IfModule mod_authz_core.c>
+  RedirectMatch 403 ^/(adapters|scripts|\.gsd|\.agent|\.agents|\.kilo|\.kilocode|\.gemini)/
+</IfModule>
