@@ -1,0 +1,11 @@
+# robots.txt — Gufran Ansari | Project Manager
+# NOTE: replace https://your-domain.com/ with the live domain before deploying.
+
+User-agent: *
+Allow: /
+
+# Every page and asset on this site is public and should be crawlable —
+# stylesheets and scripts are explicitly NOT blocked, because search engines
+# need to fetch them to render the pages.
+
+Sitemap: https://your-domain.com/sitemap.xml
