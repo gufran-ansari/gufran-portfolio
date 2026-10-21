@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" width="480" height="400">
+<rect width="480" height="400" fill="#f2fbf8"/>
+
+<g stroke="#E4E4E7" stroke-width="2" fill="none">
+  <path d="M240 60 V110"/>
+  <path d="M240 110 H120 V150"/>
+  <path d="M240 110 H240 V150"/>
+  <path d="M240 110 H360 V150"/>
+  <path d="M120 150 H70 V190"/>
+  <path d="M120 150 H170 V190"/>
+  <path d="M360 150 H310 V190"/>
+  <path d="M360 150 H410 V190"/>
+</g>
+<g>
+  <rect x="190" y="30" width="100" height="34" rx="8" fill="#1F4F46"/>
+  <rect x="80" y="150" width="80" height="30" rx="7" fill="#FAFAF8" stroke="#E4E4E7"/><rect x="200" y="150" width="80" height="30" rx="7" fill="#FAFAF8" stroke="#E4E4E7"/><rect x="320" y="150" width="80" height="30" rx="7" fill="#FAFAF8" stroke="#E4E4E7"/>
+  <rect x="35" y="190" width="70" height="26" rx="6" fill="#f2fbf8" stroke="#E4E4E7"/><rect x="135" y="190" width="70" height="26" rx="6" fill="#f2fbf8" stroke="#E4E4E7"/><rect x="275" y="190" width="70" height="26" rx="6" fill="#f2fbf8" stroke="#E4E4E7"/><rect x="375" y="190" width="70" height="26" rx="6" fill="#f2fbf8" stroke="#E4E4E7"/>
+</g>
+</svg>

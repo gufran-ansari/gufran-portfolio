@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee__track {
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+
+
+@keyframes loader-bar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* Generic reveal primitive — JS/GSAP sets the "in-view" state,
+   this just defines the resting + revealed states so content
+   never flashes unstyled before scripts run. */
+.reveal {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity var(--dur-slow) var(--ease-premium),
+              transform var(--dur-slow) var(--ease-premium);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .marquee__track {
+    animation: none;
+  }
+}

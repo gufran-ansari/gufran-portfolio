@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@300..700&display=swap');
+
+/* ==========================================================================
+   Design Tokens
+   ========================================================================== */
+
+:root {
+  /* Color */
+  --color-bg: #fdfdfd;
+  --btn-hover-bg: #fdfdfd;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #f2fbf8;
+  --color-accent: #134e4a;
+  --color-accent-secondary: #2E6B5C;
+  --color-accent-hover: #0e3b38;
+  --color-text-primary: #18181B;
+  --color-text-secondary: #71717A;
+  --color-text-light: #B4B4BC;
+  --color-border: #E4E4E7;
+  --color-overlay: rgba(24, 24, 27, 0.5);
+
+  /* Typography */
+  --font-heading: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-editorial: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --fs-hero: clamp(2.75rem, 8vw, 6rem);
+  --fs-section-heading: clamp(2rem, 4vw, 3rem);
+  --fs-subtitle: clamp(1.15rem, 2vw, 1.5rem);
+  --fs-body: 1.125rem;
+  --fs-small: 0.95rem;
+  --fs-button: 1rem;
+  --fs-eyebrow: 0.95rem;
+
+  --lh-tight: 1.05;
+  --lh-heading: 1.15;
+  --lh-body: 1.7;
+
+  --ls-tight: -0.02em;
+  --ls-normal: 0;
+  --ls-wide: 0.04em;
+
+  /* Layout */
+  --container-width: 80rem;
+  --content-width: 72rem;
+  --section-padding-block: 4.5rem;
+  --section-gap: 4.5rem;
+  --gutter: 2rem;
+
+  /* Radius */
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --radius-sm: 0.5rem;
+  --radius-btn: 9999px;
+  --radius-pill: 999rem;
+
+  /* Motion */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 0.25s;
+  --dur-base: 0.5s;
+  --dur-slow: 0.9s;
+
+  /* Button System Variables - Standardized across the entire page */
+  --button-transition: 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  --button-radius: var(--radius-btn, 9999px);
+  --button-border-width: 2px;
+  --button-icon-gap: 0.5rem;
+  --btn-dur-hover: 0.45s;
+  --btn-dur-sweep: 0.45s;
+  --btn-dur-press: 100ms;
+  --btn-ease: cubic-bezier(0.25, 1, 0.5, 1);
+  --btn-shadow-hover: 0 4px 14px rgba(19, 78, 74, 0.16);
+  --btn-shadow-active: 0 2px 4px rgba(19, 78, 74, 0.2);
+  --btn-focus-ring: 0 0 0 3px rgba(19, 78, 74, 0.2);
+
+  /* Elevation */
+  --shadow-card: 0 1px 2px rgba(24, 24, 27, 0.04), 0 12px 32px -12px rgba(24, 24, 27, 0.10);
+  --shadow-card-hover: 0 2px 4px rgba(24, 24, 27, 0.05), 0 24px 48px -16px rgba(24, 24, 27, 0.16);
+  --shadow-popup: 0 24px 64px -12px rgba(24, 24, 27, 0.28);
+
+  /* Z-index scale */
+  --z-cursor: 9999;
+  --z-loader: 9000;
+  --z-popup: 8000;
+  --z-nav: 7000;
+  --z-base: 1;
+
+  /* Cursor sizing */
+  --cursor-dot: 0.5rem;
+  --cursor-ring: 2.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* The brief specifies a light editorial theme only; we intentionally
+       keep the palette fixed rather than inverting it, since the design
+       (paper-toned surfaces, ink-dark text) is a deliberate art direction
+       choice, not a default that should flip with system theme. */
+  }
+}

@@ -1,0 +1,13 @@
+<!--
+  This markup is inlined directly at the top of <body> in index.html and
+  projects.html rather than fetched at runtime. A loader's entire job is
+  to cover the screen before anything else paints, so it can't itself
+  wait on a fetch() round-trip — this file exists as the single source
+  of truth to copy from if the loader ever needs to change.
+-->
+<div class="loader js-loader" aria-hidden="true">
+  <span class="loader__mark">GA.</span>
+  <div class="loader__bar">
+    <div class="loader__bar-fill"></div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 400" width="480" height="400">
+<rect width="480" height="400" fill="#f2fbf8"/>
+
+<g>
+  <rect x="40" y="40" width="180" height="56" rx="10" fill="#FAFAF8" stroke="#E4E4E7"/><rect x="56" y="56" width="40" height="24" rx="4" fill="#f2fbf8"/><rect x="106" y="58" width="90" height="8" rx="4" fill="#E4E4E7"/><rect x="106" y="72" width="60" height="8" rx="4" fill="#E4E4E7"/><rect x="40" y="110" width="180" height="56" rx="10" fill="#FAFAF8" stroke="#E4E4E7"/><rect x="56" y="126" width="40" height="24" rx="4" fill="#f2fbf8"/><rect x="106" y="128" width="90" height="8" rx="4" fill="#E4E4E7"/><rect x="106" y="142" width="60" height="8" rx="4" fill="#E4E4E7"/><rect x="40" y="180" width="180" height="56" rx="10" fill="#FAFAF8" stroke="#E4E4E7"/><rect x="56" y="196" width="40" height="24" rx="4" fill="#f2fbf8"/><rect x="106" y="198" width="90" height="8" rx="4" fill="#E4E4E7"/><rect x="106" y="212" width="60" height="8" rx="4" fill="#E4E4E7"/><rect x="40" y="250" width="180" height="56" rx="10" fill="#FAFAF8" stroke="#E4E4E7"/><rect x="56" y="266" width="40" height="24" rx="4" fill="#f2fbf8"/><rect x="106" y="268" width="90" height="8" rx="4" fill="#E4E4E7"/><rect x="106" y="282" width="60" height="8" rx="4" fill="#E4E4E7"/>
+  <path d="M240 200 L 300 200" stroke="#1F4F46" stroke-width="2" marker-end="url(#arrow)"/>
+  <ellipse cx="380" cy="150" rx="60" ry="18" fill="#1F4F46"/>
+  <rect x="320" y="150" width="120" height="90" fill="#1F4F46"/>
+  <ellipse cx="380" cy="240" rx="60" ry="18" fill="#2E6B5C"/>
+  <ellipse cx="380" cy="150" rx="60" ry="18" fill="#2E6B5C" opacity="0.6"/>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1F4F46"/></marker></defs>
+</g>
+</svg>

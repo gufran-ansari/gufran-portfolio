@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Custom Cursor
+   ========================================================================== */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  border-radius: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: var(--cursor-dot, 0.5rem);
+  height: var(--cursor-dot, 0.5rem);
+  background-color: var(--color-accent, #134e4a);
+  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s var(--ease-soft, ease);
+}
+
+.cursor-ring {
+  width: var(--cursor-ring, 2rem);
+  height: var(--cursor-ring, 2rem);
+  border: 1px solid var(--color-accent, #134e4a);
+  transition: width 0.25s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+              height 0.25s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+              border-radius 0.25s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+              border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s var(--ease-soft, ease);
+}
+
+.cursor-ring.is-hover-button {
+  width: calc(var(--cursor-ring, 2rem) * 1.8);
+  height: calc(var(--cursor-ring, 2rem) * 1.8);
+  border-color: var(--color-accent, #134e4a);
+}
+
+.cursor-ring.is-hover-link {
+  width: calc(var(--cursor-ring, 2rem) * 0.7);
+  height: calc(var(--cursor-ring, 2rem) * 0.7);
+  border-radius: 40%;
+}
+
+.cursor-ring.is-hover-card {
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+}
+
+.cursor-ripple {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-accent, #134e4a);
+  pointer-events: none;
+  z-index: var(--z-cursor, 9999);
+  transform: translate3d(-50%, -50%, 0) scale(0.3);
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   White / Inverted Cursor (CTA Section & Primary Backgrounds)
+   ========================================================================== */
+
+/* Modern CSS :has() zero-latency hover detection */
+body:has(.recruiter-cta-section:hover) .cursor-dot,
+body:has(.recruiter-cta-card:hover) .cursor-dot,
+body:has(.cta-banner:hover) .cursor-dot,
+body:has([data-cursor-white]:hover) .cursor-dot,
+body:has([data-cursor-inverse]:hover) .cursor-dot,
+body:has(.bg-accent:hover) .cursor-dot,
+body.is-cursor-white .cursor-dot,
+.cursor-dot.is-white {
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.65), 0 0 2px rgba(255, 255, 255, 0.9);
+}
+
+body:has(.recruiter-cta-section:hover) .cursor-ring,
+body:has(.recruiter-cta-card:hover) .cursor-ring,
+body:has(.cta-banner:hover) .cursor-ring,
+body:has([data-cursor-white]:hover) .cursor-ring,
+body:has([data-cursor-inverse]:hover) .cursor-ring,
+body:has(.bg-accent:hover) .cursor-ring,
+body.is-cursor-white .cursor-ring,
+.cursor-ring.is-white {
+  border-color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.25);
+}
+
+body:has(.recruiter-cta-section:hover) .cursor-ring.is-hover-button,
+body:has(.recruiter-cta-card:hover) .cursor-ring.is-hover-button,
+body:has(.cta-banner:hover) .cursor-ring.is-hover-button,
+body:has([data-cursor-white]:hover) .cursor-ring.is-hover-button,
+body:has([data-cursor-inverse]:hover) .cursor-ring.is-hover-button,
+body.is-cursor-white .cursor-ring.is-hover-button,
+.cursor-ring.is-white.is-hover-button {
+  border-color: #ffffff;
+}
+
+body:has(.recruiter-cta-section:hover) .cursor-ring.is-hover-link,
+body:has(.recruiter-cta-card:hover) .cursor-ring.is-hover-link,
+body:has(.cta-banner:hover) .cursor-ring.is-hover-link,
+body:has([data-cursor-white]:hover) .cursor-ring.is-hover-link,
+body:has([data-cursor-inverse]:hover) .cursor-ring.is-hover-link,
+body.is-cursor-white .cursor-ring.is-hover-link,
+.cursor-ring.is-white.is-hover-link {
+  border-color: #ffffff;
+}
+
+body:has(.recruiter-cta-section:hover) .cursor-ring.is-hover-card,
+body:has(.recruiter-cta-card:hover) .cursor-ring.is-hover-card,
+body:has(.cta-banner:hover) .cursor-ring.is-hover-card,
+body:has([data-cursor-white]:hover) .cursor-ring.is-hover-card,
+body:has([data-cursor-inverse]:hover) .cursor-ring.is-hover-card,
+body.is-cursor-white .cursor-ring.is-hover-card,
+.cursor-ring.is-white.is-hover-card {
+  border-color: #ffffff;
+}
+
+.cursor-ripple.is-white,
+body.is-cursor-white .cursor-ripple {
+  border-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Custom cursor only on precise-pointer devices; fall back to the
+   system cursor everywhere else (touch, stylus, coarse pointers). */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button {
+  cursor: none;
+}
